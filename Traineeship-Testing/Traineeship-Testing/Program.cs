@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using Traineeship.BasicTesting.Core.Interfaces.Repositories;
 using Traineeship.BasicTesting.Core.Interfaces.Services;
 using Traineeship.BasicTesting.Data.Repositories;
@@ -9,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddMudServices();
+
 builder.Services.AddSingleton<WeatherForecastService>();
+
 builder.Services.AddTransient<ICurrencyRepository, CurrencyRepository>();
 builder.Services.AddTransient<ICurrencyService, CurrencyService>();
 
