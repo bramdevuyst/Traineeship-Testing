@@ -7,4 +7,8 @@
     <RootNamespace>Traineeship_Testing</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Traineeship.BasicTesting.Data\Traineeship.BasicTesting.Data.csproj" />
+  </ItemGroup>
+
 </Project>

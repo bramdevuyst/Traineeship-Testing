@@ -1,5 +1,7 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Traineeship.BasicTesting.Core.Interfaces.Repositories;
+using Traineeship.BasicTesting.Core.Interfaces.Services;
+using Traineeship.BasicTesting.Data.Repositories;
+using Traineeship.BasicTesting.Data.Services;
 using Traineeship_Testing.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddTransient<ICurrencyRepository, CurrencyRepository>();
+builder.Services.AddTransient<ICurrencyService, CurrencyService>();
 
 var app = builder.Build();
 
