@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Traineeship.BasicTesting.Core.Interfaces.Repositories;
 using Traineeship.BasicTesting.Core.Models;
 
@@ -6,12 +7,17 @@ namespace Traineeship.BasicTesting.Data.Repositories
 {
     public class ExpenseRepository : IExpenseRepository
     {
-        private const string JsonPath = "../Data/Expenses.json";
+        public string JsonPath = "/Expenses.json";
+        private readonly IConfiguration configuration;
+        public ExpenseRepository(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
         public void Add(Expense expense)
         {
             var expenses = GetAll();
             expenses.Add(expense);
-            File.WriteAllText(JsonPath, JsonConvert.SerializeObject(expenses));
+            File.WriteAllText(configuration.GetSection("DataLocation") + JsonPath, JsonConvert.SerializeObject(expenses));
         }
 
         public Expense Get(int Id)
@@ -22,7 +28,7 @@ namespace Traineeship.BasicTesting.Data.Repositories
 
         public List<Expense> GetAll()
         {
-            using (StreamReader r = new StreamReader(JsonPath))
+            using (StreamReader r = new StreamReader(configuration.GetSection("DataLocation") + JsonPath))
             {
                 string json = r.ReadToEnd();
                 List<Expense> items = JsonConvert.DeserializeObject<List<Expense>>(json);
@@ -36,7 +42,7 @@ namespace Traineeship.BasicTesting.Data.Repositories
             var expenseToUpdate = expenses.First(x => x.Id == expense.Id);
             expenses.Remove(expenseToUpdate);
             expenses.Add(expense);
-            File.WriteAllText(JsonPath,JsonConvert.SerializeObject(expenses));
+            File.WriteAllText(configuration.GetSection("DataLocation") + JsonPath, JsonConvert.SerializeObject(expenses));
         }
     }
 }
