@@ -11,6 +11,8 @@ namespace Traineeship.BasicTesting.Core.Interfaces.Services
         // Check if status is new when you want to change the amount or bank account
         // Validate the IBAN number
 
-        void AddOrUpdate(Expense expense);
+        void Add(Expense expense);
+        void Update(Expense expense);
+
     }
 }

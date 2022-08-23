@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public double Amount { get; set; }
         public double AmountInEuro { get; set; }
+        public string BankAccount { get; set; }
 
         public string Currency { get; set; }
         public string Description { get; set; }
