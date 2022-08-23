@@ -21,6 +21,7 @@ namespace Traineeship.BasicTesting.Core.Service
                 throw new ExpenseAlreadyExistingException("Expense already existing with same Id");
             if (IBANValidator.ValidateIBANNr(expense.BankAccount).Any())
                 throw new InvalidIBANException("IBAN banknumber is invalid");
+            _expenseRepository.Add(expense);
         }
         public void Update(Expense expense)
         {
@@ -29,6 +30,12 @@ namespace Traineeship.BasicTesting.Core.Service
                 throw new ExpenseNotFoundException("Expense not yet existing");
             if (IBANValidator.ValidateIBANNr(expense.BankAccount).Any())
                 throw new InvalidIBANException("IBAN banknumber is invalid");
+            _expenseRepository.Update(expense);
+        }
+
+        public List<Expense> GetExpenses()
+        {
+            return _expenseRepository.GetAll();
         }
     }
 }

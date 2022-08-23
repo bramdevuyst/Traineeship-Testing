@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
 using Traineeship.BasicTesting.Core.Exceptions;
 using Traineeship.BasicTesting.Core.Interfaces.Repositories;
 using Traineeship.BasicTesting.Core.Models;
@@ -16,7 +17,9 @@ namespace Traineeship.BasicTesting.Service_testing
             currencyRepository.Setup(p => p.GetCurrency("DE")).Returns((Currency) null);
             var currencyService = new CurrencyService(currencyRepository.Object);
 
-            Assert.Throws<CurrencyNotFoundException>(() => currencyService.CalculateConvertedValue("DE",20));
+            Action act = () => currencyService.CalculateConvertedValue("DE", 20);
+            act.Should().Throw<CurrencyNotFoundException>()
+    .WithMessage("No currency found for DE");
 
         }
 

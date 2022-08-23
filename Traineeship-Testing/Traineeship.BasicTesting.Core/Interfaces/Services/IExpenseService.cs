@@ -13,6 +13,7 @@ namespace Traineeship.BasicTesting.Core.Interfaces.Services
 
         void Add(Expense expense);
         void Update(Expense expense);
+        List<Expense> GetExpenses();
 
     }
 }

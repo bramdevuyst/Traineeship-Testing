@@ -15,7 +15,7 @@ namespace Traineeship.BasicTesting.Data.Services
         {
             var currency = _currencyRepository.GetCurrency(Id);
             if (currency == null)
-                throw new CurrencyNotFoundException("No currency found");
+                throw new CurrencyNotFoundException("No currency found for " + Id);
             return currency.ConvertValue * amount;
         }
     }
