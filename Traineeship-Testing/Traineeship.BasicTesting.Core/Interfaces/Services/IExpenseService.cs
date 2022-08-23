@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Traineeship.BasicTesting.Core.Models;
 
 namespace Traineeship.BasicTesting.Core.Interfaces.Services
 {
-    internal interface IExpenseService
+    public interface IExpenseService
     {
+        void AddOrUpdate(Expense expense);
     }
 }

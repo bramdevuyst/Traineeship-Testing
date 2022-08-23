@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Traineeship.BasicTesting.Core.Models;
 
 namespace Traineeship.BasicTesting.Core.Interfaces.Repositories
 {
-    internal interface IExpenseRepository
+    public interface IExpenseRepository
     {
+        Expense Get(int Id);
+        List<Expense> GetAll();
+        void Add(Expense expense);
+        void Update(Expense expense);
+
     }
 }

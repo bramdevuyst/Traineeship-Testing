@@ -1,4 +1,5 @@
 ﻿using Traineeship.BasicTesting.Core;
+using Xunit;
 
 namespace Traineeship.BasicTesting
 {
