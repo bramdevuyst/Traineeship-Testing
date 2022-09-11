@@ -17,18 +17,18 @@ namespace Traineeship.BasicTesting.Data.Repositories
         {
             var expenses = GetAll();
             expenses.Add(expense);
-            File.WriteAllText(configuration.GetSection("DataLocation") + JsonPath, JsonConvert.SerializeObject(expenses));
+            File.WriteAllText(configuration.GetSection("DataLocation").Value + JsonPath, JsonConvert.SerializeObject(expenses));
         }
 
         public Expense Get(int Id)
         {
-           
-               return GetAll().FirstOrDefault(x => x.Id == Id);            
+
+            return GetAll().FirstOrDefault(x => x.Id == Id);
         }
 
         public List<Expense> GetAll()
         {
-            using (StreamReader r = new StreamReader(configuration.GetSection("DataLocation") + JsonPath))
+            using (StreamReader r = new StreamReader(configuration.GetSection("DataLocation").Value + JsonPath))
             {
                 string json = r.ReadToEnd();
                 List<Expense> items = JsonConvert.DeserializeObject<List<Expense>>(json);
@@ -42,7 +42,13 @@ namespace Traineeship.BasicTesting.Data.Repositories
             var expenseToUpdate = expenses.First(x => x.Id == expense.Id);
             expenses.Remove(expenseToUpdate);
             expenses.Add(expense);
-            File.WriteAllText(configuration.GetSection("DataLocation") + JsonPath, JsonConvert.SerializeObject(expenses));
+            File.WriteAllText(configuration.GetSection("DataLocation").Value + JsonPath, JsonConvert.SerializeObject(expenses));
+        }
+        public void DeleteAll()
+        {
+            var expenses = GetAll();
+            expenses.Clear();
+            File.WriteAllText(configuration.GetSection("DataLocation").Value + JsonPath, JsonConvert.SerializeObject(expenses));
         }
     }
 }
